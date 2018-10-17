@@ -3,7 +3,8 @@ const app = express();
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 
-const firstController = require("./controllers/first-controller");
+const userController = require("./controllers/usercontroller");
+const photosController = require("./controllers/photos");
 
 // require db
 require("./db/db");
@@ -13,7 +14,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(methodOverride("_method"));
 
 // controllers
-app.use("/",firstController);
+app.use("/photos", photosController);
+// this one has to go last b/c it's a catch-all
+app.use("/", userController);
 
 
 // listenter

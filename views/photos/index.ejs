@@ -7,14 +7,16 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>welcoem to my party, everyone</h1>
-    <h2>my friends:</h2>
+    <h1>all photos</h1>
     <ul>
-        <% for(let i=0; i<data.length; i++) { %>
-        <li><a href="/<%= data[i]._id %>"><%= data[i].name%></li>
+        <% for(let i=0; i<photos.length; i++) { %>
+        <li>
+            <a href="/photos/<%= photos[i]._id %>"><%= photos[i].name%></a>
+            <br>
+            <img src="<%= photos[i].img %>">
+        </li>
         <% } %>
     </ul>
-    <a href="/new">create a new user</a>
-    <p><a href="/photos">See all photos</a></p>
+    <a href="/photos/new">create a new photo</a>
 </body>
 </html>

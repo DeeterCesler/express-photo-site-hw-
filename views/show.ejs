@@ -11,26 +11,26 @@
         <a href="/">back to user index</a>
     </nav>
     <h1><%= data.name %></h1>
-    <a href="<%= data.name %>/edit">edit</a><br>
+    <section>
+        <a href="<%= data._id %>/edit">edit <%= data.name %></a><br>
+        <form method="POST" action="/<%= data._id %>?_method=DELETE">
+            <input type="submit" value="delete <%= data.name %>">
+        </form>
+    </section>
+    <br>
+    <h2><%= data.name %>'s photos:</h2>
     <section>
         <ul>
             <% if(photos){for(let i=0; i<photos.length; i++){ %>
-                <ul>
-                    <li>
-                        <img src="<%= photos[i].img %>">
-                    </li>
-                    <li>
-                        <form method="POST" action="/<%= data._id %>/<%= photos[i]._id %>?_method=DELETE">
-                            <input type="submit" value="delete <%= photos[i].name %>">
-                        </form>
-                    </li>
-                </ul>
+                <li>
+                    <img src="<%= photos[i].img %>"><br>
+                    <form method="POST" action="/<%= data._id %>/<%= photos[i]._id %>?_method=DELETE">
+                        <input type="submit" value="delete <%= photos[i].name %>">
+                    </form>
+                </li>
             <% }} %>
         </ul>
         <p><a href="/<%= data._id %>/new-photo">add a new photo</a></p>
     </section>
-    <form method="POST" action="/<%= data._id %>?_method=DELETE">
-        <input type="submit" value="delete <%= data.name %>">
-    </form>
 </body>
 </html>

@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../models/users")
 const Photo = require("../models/photo");
 
+// index
 router.get("/", (req, res) => {
     User.find({}, (err, foundData) => {
         if(err){
@@ -15,10 +16,12 @@ router.get("/", (req, res) => {
     })
 });
 
+// new user
 router.get("/new", (req, res) => {
     res.render("new.ejs");
 });
 
+// post a new user
 router.post("/", (req, res) => {
     User.create(req.body, (err, data) => {
         if(err){
@@ -29,8 +32,9 @@ router.post("/", (req, res) => {
     });
 });
 
+// edit user
 router.get("/:id/edit", (req, res) => {
-    User.find({name: req.params.id}, (err, foundData)=> {
+    User.findById(req.params.id, (err, foundData)=> {
         if(err){
             console.log(err);
         } else {
@@ -41,6 +45,7 @@ router.get("/:id/edit", (req, res) => {
     });
 });
 
+// update user
 router.put("/:id", (req, res) => {
     User.findById(req.params.id, req.body, (err, foundData)=> {
         if(err){
@@ -94,6 +99,7 @@ router.delete("/:id/:photoid", (req, res) => {
     });
 });
 
+// show a user and their photos
 router.get("/:id", (req, res) => {
     User.findById(req.params.id, (err, foundData)=> {
         if(err){
@@ -107,6 +113,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
+// delete a user
 router.delete("/:id", (req, res) => {
     User.findByIdAndDelete(req.params.id, (err, foundData)=> {
         if(err){
