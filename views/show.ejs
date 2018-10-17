@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <a href="/">back to user index</a>
+    </nav>
+    <h1><%= data.name %></h1>
+    <a href="<%= data.name %>/edit">edit</a><br>
+    <section>
+        <ul>
+            <% if(photos){for(let i=0; i<photos.length; i++){ %>
+                <ul>
+                    <li>
+                        <img src="<%= photos[i].img %>">
+                    </li>
+                    <li>
+                        <form method="POST" action="/<%= data._id %>/<%= photos[i]._id %>?_method=DELETE">
+                            <input type="submit" value="delete <%= photos[i].name %>">
+                        </form>
+                    </li>
+                </ul>
+            <% }} %>
+        </ul>
+        <p><a href="/<%= data._id %>/new-photo">add a new photo</a></p>
+    </section>
+    <form method="POST" action="/<%= data._id %>?_method=DELETE">
+        <input type="submit" value="delete <%= data.name %>">
+    </form>
+</body>
+</html>

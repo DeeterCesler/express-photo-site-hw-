@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>welcoem to my party, everyone</h1>
+    <h2>my friends:</h2>
+    <ul>
+        <% for(let i=0; i<data.length; i++) { %>
+            <% console.log("ITS STARTING") %>
+            <% console.log(data) %>
+            <% console.log("ITS OVER") %>
+        <li><a href="/<%= data[i]._id %>"><%= data[i].name%></li>
+        <% } %>
+    </ul>
+</body>
+</html>
