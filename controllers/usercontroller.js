@@ -114,15 +114,21 @@ router.get("/:id", (req, res) => {
 });
 
 // delete a user
-router.delete("/:id", (req, res) => {
-    User.findByIdAndDelete(req.params.id, (err, foundData)=> {
-        if(err){
-            console.log(err);
-        } else {
-            console.log("DELETED");
-            res.redirect("/");
-        };
-    });
+router.delete("/:id", async (req, res, err) => {
+    try {
+        const userOfPhotos = await User.findById(req.params.id);
+        for(let i=0; i<userOfPhotos.photos.length; i++){
+            const foundPhoto = await Photo.findByIdAndDelete(userOfPhotos.photos[i].id);
+            foundPhoto.save();
+        }
+        // userOfPhotos.photos.id(req.params.id).remove();
+        const deletedUser = await User.findByIdAndDelete(req.params.id);
+        deletedUser.save();
+     
+        res.redirect("/");
+    } catch(err){
+        next(err)
+    }
 });
 
 module.exports = router;
